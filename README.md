@@ -1,6 +1,6 @@
 # stretchypants
 
-Sometimes I get all fat feeling and need to wear stretchypants.  At the same time I wrote the world's worst (:tm:) elasticsearch client.
+Sometimes I get all fat feeling and need to wear stretchypants.  At the same time I wrote the world's worst :tm: elasticsearch client.
 
 The only thing this really does is scope your request urls to an `/<index>` and `/<type>` url, and do bulk inserts because those are neat.
 
