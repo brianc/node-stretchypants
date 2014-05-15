@@ -1,6 +1,6 @@
 # stretchypants
 
-Sometimes I get all fat feeling and need to wear stretchypants.  At the same time I wrote the world's worst :tm: elasticsearch client.
+Sometimes I get all fat feeling and need to wear stretchypants.  At the same time I wrote the world's worst elasticsearch client :tm:.
 
 The only thing this really does is scope your request urls to an `/<index>` and `/<type>` url, and do bulk inserts because those are neat.
 
@@ -31,7 +31,7 @@ es.index('boop').type('hai').get('/search', search, function(err, res) {
 })
 ```
 
-There are bulk inserts too which is really kinda the point of the library but remember how I'm so lazy I wear stretchypants?  yeah...sometimes I'm so lazy I don't document either. :content:
+There are bulk inserts too which is really kinda the point of the library but remember how I'm so lazy I wear stretchypants?  yeah...sometimes I'm so lazy I don't document either. :no_mouth:
 
 
 LICENSE
