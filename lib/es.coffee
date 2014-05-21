@@ -37,22 +37,18 @@ module.exports = class ES
     options.path = "#{@basePath}#{options.path}" if @basePath?
 
     req = http.request options, (res) ->
-      if not res or res.statusCode > 299
-        console.log res.body
-        return cb(new Error "bad status code #{res and res.statusCode}")
       res.setEncoding "utf8"
       res.pipe concat (data) ->
+        if res.statusCode > 299
+          err = new Error("bad status code #{res and res.statusCode} \n " + data)
+          return cb(err)
         #console.log data
         cb null, JSON.parse(data)
 
     console.log options.method, "http://#{options.hostname}:#{options.port}#{options.path}"
     if options.data?
-      if typeof options.data is "string"
-        req.write options.data
-      else
-        body = JSON.stringify(options.data)
-        #console.log body
-        req.write body
+      body = if typeof options.data is "string" then options.data else JSON.stringify(options.data)
+      req.write body
     req.end()
     req.once 'error', cb
 
