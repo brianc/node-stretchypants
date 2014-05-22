@@ -1,3 +1,4 @@
+
 module.exports = class Bulk
   constructor: (@es) ->
     @ops = []
@@ -10,11 +11,7 @@ module.exports = class Bulk
         "_type": @es.typeName
         "_id": doc.id
 
-    fields = {}
-    for key, val of doc
-      fields[key] = val unless key is "id"
-
-    @ops.push fields
+    @ops.push doc
 
     return this
 
@@ -22,7 +19,7 @@ module.exports = class Bulk
   # for request to elastic search
   toJSON: ->
     result = @ops.map(JSON.stringify).join "\n"
-    "#{result}\n"
+    return "#{result}\n"
 
   # post the bulk request to elastic search
   post: (cb) ->

@@ -4,21 +4,34 @@ ok = require "okay"
 async = require "async"
 config = require "../lib/config"
 
-module.exports = class ES
+{Writable} = require "stream"
+
+module.exports = class ES extends Writable
 
   @index: (name) -> new ES(name)
 
   constructor: (name) ->
+
+    Writable.call(this, {
+      objectMode: true
+      highWaterMark: 1
+    })
+
     @basePath = ""
     if name?
       @basePath = "/#{@basePath}#{name}"
       @indexName = name
 
-  type: (name) ->
-    result = new ES(@indexName)
+  type: (name, options) ->
+    result = new ES(@indexName, options)
     result.typeName = name
     result.basePath = "#{result.basePath}/#{name}"
     return result
+
+  _write: (chunks, _, cb) ->
+    bulk = @bulk()
+    bulk.index(chunk) for chunk in chunks
+    bulk.post(cb)
 
   request: (options, cb) ->
     options.hostname = config.es.host
@@ -63,6 +76,7 @@ module.exports = class ES
     @dispatch "GET", path, body, cb
 
   post: (path, body, cb) ->
+    console.log body
     @dispatch "POST", path, body, cb
 
   delete: (path, body, cb) ->
