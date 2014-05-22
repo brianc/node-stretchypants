@@ -76,7 +76,6 @@ module.exports = class ES extends Writable
     @dispatch "GET", path, body, cb
 
   post: (path, body, cb) ->
-    console.log body
     @dispatch "POST", path, body, cb
 
   delete: (path, body, cb) ->
