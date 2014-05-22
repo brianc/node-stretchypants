@@ -1,6 +1,6 @@
 {
   "name": "stretchypants",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Literally the world's worst elasticsearch client",
   "main": "index.js",
   "scripts": {
