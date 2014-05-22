@@ -1,3 +1,9 @@
+class Keys
+  constructor: (@_index, @_type, @_id) ->
+
+class Op
+  constructor: (_index, _type, _id) ->
+    @index = new Keys(_index, _type, _id)
 
 module.exports = class Bulk
   constructor: (@es) ->
@@ -5,11 +11,7 @@ module.exports = class Bulk
 
   # add an index command to this bulk operation
   index: (doc) ->
-    @ops.push
-      index:
-        "_index": @es.indexName
-        "_type": @es.typeName
-        "_id": doc.id
+    @ops.push new Op(@es.indexName, @es.typeName, doc.id)
 
     @ops.push doc
 
