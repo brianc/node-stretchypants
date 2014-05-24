@@ -2,7 +2,9 @@
 
 Sometimes I get all fat feeling and need to wear stretchypants.  Sometimes I write bad code.  This is both of those times.
 
-The only thing this really does is scope your request urls to an `/<index>` and `/<type>` url, and do bulk inserts because those are neat.  You can pipe a stream into here, and get some awesome ETL hotness like this:
+The only thing this really does is scope your request urls to an `/<index>` and `/<type>` url, and do bulk inserts because those are neat.  
+
+The most important thing is stretchypants returns you an instance of a __writable stream__ to your elasticsearch index & type.  You can pipe a (object) stream of arrays into stretchypants, and get some awesome ETL hotness like this:
 
 
 ### awesomeness
@@ -18,7 +20,7 @@ query('SELECT * FROM some_big_table')
   .pipe(clumpy(1000))
   .pipe(es)
   
-//THAT JUST HAPPENED
+//THAT JUST HAPPENED!!!!
 ```
 
 
